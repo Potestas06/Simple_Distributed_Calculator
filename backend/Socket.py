@@ -12,14 +12,19 @@ async def connect(port, message):
         return response
 
 
+async def add(message):
+    return await connect("8001", message)
+
 async def subtract(message):
     return await connect("8002", message)
 
+async def multiply(message):
+    return await connect("8003", message)
 
 async def handler(websocket, path):
     async for message in websocket:
         print(f"Received message: {message}")
-        reply = await subtract(message)
+        reply = await multiply(message)
         await websocket.send(reply)
         print(f"Sent reply: {reply}")
 

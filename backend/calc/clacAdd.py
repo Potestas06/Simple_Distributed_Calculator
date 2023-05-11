@@ -1,19 +1,20 @@
 import asyncio
 import websockets
+import json
 
+async def add(message):
+    data = json.loads(message)
+    num1 = int(data['num1'])
+    num2 = int(data['num2'])
+    result = num1 + num2
+    return str(result)
 
 async def handler(websocket, path):
     async for message in websocket:
         print(f"Received message: {message}")
-        reply = Add(message)
+        reply = await add(message)
         await websocket.send(reply)
         print(f"Sent reply: {reply}")
-
-
-async def Add(message):
-    return (message.num1 + message.num2)
-
-
 
 start_server = websockets.serve(handler, "localhost", 8001)
 
