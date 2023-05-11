@@ -8,8 +8,14 @@
     <h1>WebSocket Example</h1>
     <div id="output"></div>
     <form>
-      <input type="text" id="num1" />
-      <input type="text" id="num2">
+      <input type="text" id="num1" / required>
+      <select id="method" required>
+        <option value="1">+</option>
+        <option value="2">-</option>
+        <option value="3">:</option>
+        <option value="4">*</option>
+      </select>
+      <input type="text" id="num2" required>
       <button type="submit" id="send">Send</button>
     </form>
 
@@ -35,10 +41,12 @@
       sendButton.addEventListener("click", (event) => {
         event.preventDefault();
         const message = {
+            method: method.value,
             num1: num1.value,
             num2: num2.value
         }
-        socket.send(JSON.stringify(message));
+        message = JSON.stringify(message);
+        socket.send(message);
         output.innerHTML += `Sent: ${message}<br>`;
         input.value = "";
       });
