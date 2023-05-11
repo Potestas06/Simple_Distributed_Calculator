@@ -1,29 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WebSocker Client</title>
-</head>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>WebSocket Example</title>
+  </head>
+  <body>
+    <h1>WebSocket Example</h1>
+    <div id="output"></div>
+    <form>
+      <input type="text" id="input" />
+      <button type="submit" id="send">Send</button>
+    </form>
 
-<body>
-    <button onclick="contactServer">Click Here</button>
-</body>
+    <script>
+      const output = document.getElementById("output");
+      const input = document.getElementById("input");
+      const sendButton = document.getElementById("send");
 
-<script>
-    const socket = new WebSocket('ws://localhost:8000');
+      const socket = new WebSocket("ws://localhost:8000");
 
-    socket.addEventListener('open', function (event) {
-        socket.send('Connection Established');
-    });
+      socket.onopen = () => {
+        output.innerHTML += "WebSocket connection opened<br>";
+      };
 
-    socket.addEventListener('message', function (event) {
-        console.log(event.data);
-    });
+      socket.onmessage = (event) => {
+        output.innerHTML += `Received: ${event.data}<br>`;
+      };
 
-    
+      socket.onclose = () => {
+        output.innerHTML += "WebSocket connection closed<br>";
+      };
 
-</script>
-
+      sendButton.addEventListener("click", (event) => {
+        event.preventDefault();
+        const message = input.value;
+        socket.send(message);
+        output.innerHTML += `Sent: ${message}<br>`;
+        input.value = "";
+      });
+    </script>
+  </body>
 </html>
