@@ -21,10 +21,13 @@ async def subtract(message):
 async def multiply(message):
     return await connect("8003", message)
 
+async def divide(message):
+    return await connect("8004", message)
+
 async def handler(websocket, path):
     async for message in websocket:
         print(f"Received message: {message}")
-        reply = await multiply(message)
+        reply = await divide(message)
         await websocket.send(reply)
         print(f"Sent reply: {reply}")
 
