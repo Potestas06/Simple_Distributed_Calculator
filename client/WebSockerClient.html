@@ -8,14 +8,14 @@
     <h1>WebSocket Example</h1>
     <div id="output"></div>
     <form>
-      <input type="text" id="num1" / required>
+      <input type="number" id="num1" / required>
       <select id="method" required>
-        <option value="1">+</option>
-        <option value="2">-</option>
-        <option value="3">:</option>
-        <option value="4">*</option>
+        <option value="add">+</option>
+        <option value="subtract">-</option>
+        <option value="divide">:</option>
+        <option value="multiply">*</option>
       </select>
-      <input type="text" id="num2" required>
+      <input type="number" id="num2" required>
       <button type="submit" id="send">Send</button>
     </form>
 
@@ -45,10 +45,9 @@
             num1: num1.value,
             num2: num2.value
         }
-        message = JSON.stringify(message);
-        socket.send(message);
-        output.innerHTML += `Sent: ${message}<br>`;
-        input.value = "";
+        socket.send(JSON.stringify(message));
+        output.innerHTML += `Sent: ${JSON.stringify(message)}<br>`;
+        //input.value = "";
       });
     </script>
   </body>

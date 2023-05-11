@@ -2,6 +2,7 @@ import asyncio
 import websockets
 import json
 
+
 async def multiply(message):
     data = json.loads(message)
     num1 = int(data['num1'])
@@ -11,6 +12,7 @@ async def multiply(message):
     else:
         result = num1 / num2
     return str(result)
+
 
 async def handler(websocket, path):
     async for message in websocket:
