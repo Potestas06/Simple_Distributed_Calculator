@@ -26,6 +26,7 @@ async def calcolatore(message):
 
 
 async def checker(message, result):
+    print("calcolatore: " + await calcolatore(message) + " result: " + result)
     if await calcolatore(message) != result:
         print("Error: wrong result!")
         return False
@@ -34,10 +35,10 @@ async def checker(message, result):
         return True
 
 
-async def log(message, response, checksumm):
+async def log(message, response, checksum):
     async with websockets.connect("ws://localhost:8010") as websocket:
         await websocket.send(json.dumps({
-            "checksumm": checksumm,
+            "checksum": checksum,
             "message": message,
             "response": response
         }))
