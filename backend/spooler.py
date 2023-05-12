@@ -1,38 +1,20 @@
 import asyncio
 import json
 import websockets
+import random
+
+ports = [8200, 8201, 8202]
 
 
-async def calcolatore(message):
-    data = json.loads(message)
-    num1 = float(data['num1'])
-    num2 = float(data['num2'])
-
-    if data['method'] == 'add':
-        result = num1 + num2
-    elif data['method'] == 'subtract':
-        result = num1 - num2
-    elif data['method'] == 'multiply':
-        result = num1 * num2
-    elif data['method'] == 'divide':
-        if num2 == 0:
-            result = "Error division by 0!"
-        else:
-            result = num1 / num2
-    else:
-        print("Error: method not found!")
-
-    return str(result)
+async def get_checksum(message):
+    return await connect(random.choice(ports), message)
 
 
-async def checker(message, result):
-    print("calcolatore: " + await calcolatore(message) + " result: " + result)
-    if await calcolatore(message) != result:
-        print("Error: wrong result!")
-        return False
-    else:
-        print("Result ok!")
+async def checker(result, message):
+    if result == await get_checksum(message):
         return True
+    else:
+        return False
 
 
 async def log(message, response, checksum):
@@ -62,39 +44,11 @@ async def connect(port, message):
         return response
 
 
-async def add(message):
-    return await connect("8100", message)
-
-
-async def subtract(message):
-    return await connect("8101", message)
-
-
-async def multiply(message):
-    return await connect("8102", message)
-
-
-async def divide(message):
-    return await connect("8103", message)
-
-
 async def handler(websocket, path):
     async for message in websocket:
         print(f"Received message: {message}")
-        data = json.loads(message)
-
-        method = data.get("method")
-        if method == "add":
-            reply = await add(message)
-        elif method == "subtract":
-            reply = await subtract(message)
-        elif method == "multiply":
-            reply = await multiply(message)
-        elif method == "divide":
-            reply = await divide(message)
-
-        logdata = await log(message, reply, await checker(message, reply))
-
+        reply = await get_checksum(message)
+        await log(message, reply, await checker(reply, message))
         await websocket.send(reply)
         print(f"Sent reply: {reply}")
 

@@ -10,16 +10,9 @@
       <h1>Calcolator</h1>
     <form>
       <div class="grid">
-        <input type="number" id="num1" required>
-      <select id="method" required>
-        <option value="add">+</option>
-        <option value="subtract">-</option>
-        <option value="divide">:</option>
-        <option value="multiply">*</option>
-      </select>
-      <input type="number" id="num2" required>
-      </div>
+        <input type="number" id="work" required>
         <button style="position: absolute; width: 350px;" type="submit" id="send">Send</button>
+      </div>
     </form>
 
     <div id="output"></div>
@@ -47,9 +40,7 @@
       sendButton.addEventListener("click", (event) => {
         event.preventDefault();
         const message = {
-            method: method.value,
-            num1: num1.value,
-            num2: num2.value
+          work: work.value,
         }
         socket.send(JSON.stringify(message));
       });
