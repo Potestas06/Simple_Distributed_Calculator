@@ -20,6 +20,7 @@ async def calcolatore(message):
         else:
             result = num1 / num2
     else:
+        result = "Something went wrong!"
         print("Error: method not found!")
 
     return str(result)
