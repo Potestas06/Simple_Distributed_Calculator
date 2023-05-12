@@ -2,21 +2,23 @@ import asyncio
 import websockets
 import json
 import datetime
+import os
 
 LOGFILE_PATH = "logfile.log"
 
-async def log(message, reply):
+async def log(message):
     current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    log_entry_message = f"[{current_time}] {message}"
-    log_entry_reply = f"[{current_time}] {reply}"
+    log_entry = f"[{current_time}] {message}"
+    if not os.path.exists(LOGFILE_PATH):
+        with open(LOGFILE_PATH, "w"):
+            pass  # Erstelle die Datei, falls sie nicht existiert
     with open(LOGFILE_PATH, "a") as logfile:
-        logfile.write(f"{log_entry_message}\n")
-        logfile.write(f"{log_entry_reply}\n")
+        logfile.write(f"{log_entry}\n")
 
 async def handler(websocket, path):
     async for message in websocket:
         print(f"Received message: {message}")
-        await log(message, reply)
+        await log(message)
         reply = json.dumps({"status": "success"})
         await websocket.send(reply)
         print(f"Sent reply: {reply}")
