@@ -3,9 +3,41 @@ import json
 import websockets
 
 
-async def log(message, response):
+async def calcolatore(message):
+    data = json.loads(message)
+    num1 = int(data['num1'])
+    num2 = int(data['num2'])
+
+    if data['method'] == 'add':
+        result = num1 + num2
+    elif data['method'] == 'subtract':
+        result = num1 - num2
+    elif data['method'] == 'multiply':
+        result = num1 * num2
+    elif data['method'] == 'divide':
+        if num2 == 0:
+            result = "Error division by 0!"
+        else:
+            result = num1 / num2
+    else:
+        print("Error: method not found!")
+
+    return str(result)
+
+
+async def checker(message, result):
+    if await calcolatore(message) != result:
+        print("Error: wrong result!")
+        return False
+    else:
+        print("Result ok!")
+        return True
+
+
+async def log(message, response, checksumm):
     async with websockets.connect("ws://localhost:8010") as websocket:
         await websocket.send(json.dumps({
+            "checksumm": checksumm,
             "message": message,
             "response": response
         }))
@@ -60,7 +92,7 @@ async def handler(websocket, path):
         elif method == "divide":
             reply = await divide(message)
 
-        log(message, reply)
+        log(message, reply, checker(message, reply))
         await websocket.send(reply)
         print(f"Sent reply: {reply}")
 
