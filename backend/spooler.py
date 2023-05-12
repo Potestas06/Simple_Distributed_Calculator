@@ -3,6 +3,22 @@ import json
 import websockets
 
 
+async def log(message, response):
+    async with websockets.connect("ws://localhost:8010") as websocket:
+        await websocket.send(json.dumps({
+            "message": message,
+            "response": response
+        }))
+        print(f"Sent: {message}")
+
+        reply = await websocket.recv()
+        data = json.loads(reply)
+        if data["status"] == "success":
+            print(f"Logged: {message}")
+        else:
+            print(f"Failed to log: {message}")
+
+
 async def connect(port, message):
     async with websockets.connect(f"ws://localhost:{port}") as websocket:
         await websocket.send(message)
@@ -43,9 +59,8 @@ async def handler(websocket, path):
             reply = await multiply(message)
         elif method == "divide":
             reply = await divide(message)
-        else:
-            reply = "Invalid method"
 
+        log(message, reply)
         await websocket.send(reply)
         print(f"Sent reply: {reply}")
 
