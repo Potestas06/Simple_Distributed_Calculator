@@ -4,9 +4,14 @@ import json
 
 
 async def calc(message):
-    data = json.loads(message)
-    work = data['work']
-    return await str(eval(work))
+    try:
+        data = json.loads(message)
+        work = data['work']
+        if not isinstance(work, str):
+            raise ValueError("Invalid input")
+        return str(eval(work))
+    except (ValueError, KeyError, TypeError, SyntaxError):
+        return "Error: Invalid input"
 
 
 async def handler(websocket, path):
