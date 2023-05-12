@@ -31,7 +31,7 @@
       };
 
       socket.onmessage = (event) => {
-        output.innerHTML += `Received: ${event.data}<br>`;
+        output.innerHTML += `Result: ${event.data}<br>`;
       };
 
       socket.onclose = () => {
@@ -46,8 +46,6 @@
             num2: num2.value
         }
         socket.send(JSON.stringify(message));
-        output.innerHTML += `Sent: ${JSON.stringify(message)}<br>`;
-        //input.value = "";
       });
     </script>
   </body>
