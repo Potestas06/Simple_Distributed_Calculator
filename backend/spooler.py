@@ -3,7 +3,7 @@ import json
 import websockets
 import random
 
-ports = [8200, 8201, 8202]
+ports = [8200, 8201, 8202, 8203, 8204]
 
 
 async def get_checksum(message):
