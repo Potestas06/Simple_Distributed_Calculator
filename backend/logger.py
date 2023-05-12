@@ -4,7 +4,7 @@ import json
 import datetime
 import os
 
-LOGFILE_PATH = "logfile.log"
+LOGFILE_PATH = "logs/logfile.log"
 
 
 async def log(message, response, checksum):
