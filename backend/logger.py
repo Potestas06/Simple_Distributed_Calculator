@@ -4,7 +4,8 @@ import json
 import datetime
 import os
 
-LOGFILE_PATH = "logfile.log"
+LOGFILE_PATH = "logs\logfile.log"
+
 
 async def log(message, response, checksum):
     current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -24,9 +25,11 @@ async def get_reply(websocket):
     async for response in websocket:
         return response
 
+
 async def get_checksum(websocket):
     async for checksum in websocket:
         return checksum
+
 
 async def handler(websocket, path):
     response = await get_reply(websocket)

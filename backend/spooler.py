@@ -41,14 +41,14 @@ async def log(message, response, checksumm):
             "message": message,
             "response": response
         }))
-        print(f"Sent: {message}")
+        print(f'Sent "{message}" to logger')
 
-        reply = await websocket.recv()
-        data = json.loads(reply)
-        if data["status"] == "success":
-            print(f"Logged: {message}")
-        else:
-            print(f"Failed to log: {message}")
+        # reply = await websocket.recv()
+        # data = json.loads(reply)
+        # if data["status"] == "success":
+        #     print(f"Logged: {message}")
+        # else:
+        #     print(f"Failed to log: {message}")
 
 
 async def connect(port, message):
@@ -92,7 +92,8 @@ async def handler(websocket, path):
         elif method == "divide":
             reply = await divide(message)
 
-        log(message, reply, checker(message, reply))
+        logdata = await log(message, reply, await checker(message, reply))
+
         await websocket.send(reply)
         print(f"Sent reply: {reply}")
 
