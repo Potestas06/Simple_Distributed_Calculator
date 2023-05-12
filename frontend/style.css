@@ -87,7 +87,7 @@ body {
   padding: 50px 40px 40px 40px;
 }
 
-.c, .signed, .percent, .divide, .seven, .eight, .nine, .times, .four, .five, .six, .minus, .one, .two, .three, .plus, .zero, .decimal, .equals {
+.c, .d, .signed, .percent, .divide, .seven, .eight, .nine, .times, .four, .five, .six, .minus, .one, .two, .three, .plus, .zero, .decimal, .equals {
   text-align: center;
   height: 60px;
   width: 60px;
