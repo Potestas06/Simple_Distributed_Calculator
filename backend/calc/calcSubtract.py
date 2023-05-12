@@ -5,8 +5,8 @@ import json
 
 async def subtract(message):
     data = json.loads(message)
-    num1 = int(data["num1"])
-    num2 = int(data["num2"])
+    num1 = float(data["num1"])
+    num2 = float(data["num2"])
     result = num1 - num2
     return str(result)
 

@@ -5,8 +5,8 @@ import websockets
 
 async def calcolatore(message):
     data = json.loads(message)
-    num1 = int(data['num1'])
-    num2 = int(data['num2'])
+    num1 = float(data['num1'])
+    num2 = float(data['num2'])
 
     if data['method'] == 'add':
         result = num1 + num2
