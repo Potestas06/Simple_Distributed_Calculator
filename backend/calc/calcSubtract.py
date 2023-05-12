@@ -18,7 +18,7 @@ async def handler(websocket, path):
         await websocket.send(str(reply))
         print(f"Sent reply: {reply}")
 
-start_server = websockets.serve(handler, "localhost", 8002)
+start_server = websockets.serve(handler, "localhost", 8101)
 
 asyncio.get_event_loop().run_until_complete(start_server)
 asyncio.get_event_loop().run_forever()

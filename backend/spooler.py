@@ -14,19 +14,19 @@ async def connect(port, message):
 
 
 async def add(message):
-    return await connect("8001", message)
+    return await connect("8100", message)
 
 
 async def subtract(message):
-    return await connect("8002", message)
+    return await connect("8101", message)
 
 
 async def multiply(message):
-    return await connect("8003", message)
+    return await connect("8102", message)
 
 
 async def divide(message):
-    return await connect("8004", message)
+    return await connect("8103", message)
 
 
 async def handler(websocket, path):
@@ -50,7 +50,7 @@ async def handler(websocket, path):
         print(f"Sent reply: {reply}")
 
 
-start_server = websockets.serve(handler, "localhost", 8000)
+start_server = websockets.serve(handler, "localhost", 8001)
 
 asyncio.get_event_loop().run_until_complete(start_server)
 asyncio.get_event_loop().run_forever()
