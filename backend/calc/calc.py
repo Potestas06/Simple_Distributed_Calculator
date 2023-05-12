@@ -8,18 +8,24 @@ async def calc(message):
         data = json.loads(message)
         work = data['work']
         if not isinstance(work, str):
-            raise ValueError("Invalid input")
-        return str(eval(work))
-    except (ValueError, KeyError, TypeError, SyntaxError):
-        return "Error: Invalid input"
+            raise NameError("Invalid input")
+        result = str(eval(work))
+        return result
+    except (NameError, KeyError, TypeError, SyntaxError) as e:
+        error_msg = "Error: " + str(e)
+        return error_msg
 
 
 async def handler(websocket, path):
-    async for message in websocket:
-        print(f"Received message: {message}")
-        reply = await calc(message)
-        await websocket.send(reply)
-        print(f"Sent reply: {reply}")
+    try:
+        async for message in websocket:
+            print(f"Received message: {message}")
+            reply = await calc(message)
+            await websocket.send(reply)
+            print(f"Sent reply: {reply}")
+    except websockets.exceptions.ConnectionClosed:
+        print("Connection closed")
+
 
 start_server = websockets.serve(handler, "localhost", 8200)
 

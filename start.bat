@@ -4,5 +4,5 @@ start cmd /k python spooler.py
 start cmd /k python logger.py
 cd calc
 start cmd /k python calc.py
-start cmd /k python calc2.py
+start cmd /k python calc2.py 
 start cmd /k python calc3.py
