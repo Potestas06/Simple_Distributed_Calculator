@@ -8,10 +8,9 @@ LOGFILE_PATH = "logfile.log"
 
 
 async def log(message, response, checksum):
-    print(f"2 Received message: {message}")
-    print(f"2 Received response: {response}")
-    print(f"2 Received checksum: {checksum}")
     current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    response = json.dumps({"result": response})
+    checksum = json.dumps({"checksum": checksum})
     log_entry_message = f"[{current_time}] {message}"
     log_entry_response = f"[{current_time}] {response}"
     log_entry_checksum = f"[{current_time}] {checksum}"
@@ -21,7 +20,7 @@ async def log(message, response, checksum):
     with open(LOGFILE_PATH, "a") as logfile:
         logfile.write(f"{log_entry_message}\n")
         logfile.write(f"{log_entry_response}\n")
-        logfile.write(f"{log_entry_checksum}\n")
+        logfile.write(f"{log_entry_checksum}\n\n")
 
 async def handler(websocket, path):
     async for message in websocket:
