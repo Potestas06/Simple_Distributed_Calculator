@@ -2,13 +2,16 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>WebSocket Example</title>
+    <title>Calcolator</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
   </head>
   <body>
-    <h1>WebSocket Example</h1>
+    <div class="container" style="text-align: center;">
+      <h1>Calcolator</h1>
     <div id="output"></div>
     <form>
-      <input type="number" id="num1" required>
+      <div class="grid">
+        <input type="number" id="num1" required>
       <select id="method" required>
         <option value="add">+</option>
         <option value="subtract">-</option>
@@ -16,8 +19,10 @@
         <option value="multiply">*</option>
       </select>
       <input type="number" id="num2" required>
-      <button type="submit" id="send">Send</button>
+      </div>
+        <button style="position: absolute; width: 350px;" type="submit" id="send">Send</button>
     </form>
+    </div>
 
     <script>
       const output = document.getElementById("output");
