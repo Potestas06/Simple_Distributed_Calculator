@@ -16,11 +16,12 @@ async def log(message, response, checksum):
     log_entry_checksum = f"[{current_time}] {checksum}"
     if not os.path.exists(LOGFILE_PATH):
         with open(LOGFILE_PATH, "w"):
-            pass  # Create the file if it doesn't exist
+            pass
     with open(LOGFILE_PATH, "a") as logfile:
         logfile.write(f"{log_entry_message}\n")
         logfile.write(f"{log_entry_response}\n")
         logfile.write(f"{log_entry_checksum}\n\n")
+
 
 async def handler(websocket, path):
     async for message in websocket:

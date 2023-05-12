@@ -1,19 +1,20 @@
 @import url("https://fonts.googleapis.com/css?family=Odibee+Sans&display=swap");
+
 :root {
   --body-bg-color: #e0e5ec;
   --bg-color: #e0e5ec;
-  --primary-font-color: rgba(144,152,168,1);
-  --secondary-font-color: rgba(51,64,89,1);
-  --soft-high-light: rgba(255,255,255,.43);
-  --dark-high-light: rgba(217,210,200,.51);
+  --primary-font-color: rgba(144, 152, 168, 1);
+  --secondary-font-color: rgba(51, 64, 89, 1);
+  --soft-high-light: rgba(255, 255, 255, .43);
+  --dark-high-light: rgba(217, 210, 200, .51);
 }
 
 [data-theme=dark] {
   --bg-color: #131419;
   --primary-font-color: #c7c7c7;
   --secondary-font-color: #03a9f4;
-  --soft-high-light: rgba(255,255,255,.05);
-  --dark-high-light: rgba(0,0,0,.51);
+  --soft-high-light: rgba(255, 255, 255, .05);
+  --dark-high-light: rgba(0, 0, 0, .51);
 }
 
 * {
@@ -87,7 +88,26 @@ body {
   padding: 50px 40px 40px 40px;
 }
 
-.c, .d, .signed, .percent, .divide, .seven, .eight, .nine, .times, .four, .five, .six, .minus, .one, .two, .three, .plus, .zero, .decimal, .equals {
+.c,
+.d,
+.signed,
+.percent,
+.divide,
+.seven,
+.eight,
+.nine,
+.times,
+.four,
+.five,
+.six,
+.minus,
+.one,
+.two,
+.three,
+.plus,
+.zero,
+.decimal,
+.equals {
   text-align: center;
   height: 60px;
   width: 60px;
@@ -229,16 +249,16 @@ body {
   width: 22px;
 }
 
-input:checked + .slider {
+input:checked+.slider {
   background-color: var(--bg-color);
   box-shadow: 6px 6px 16px 0 var(--dark-high-light), -6px -6px 16px 0 var(--soft-high-light), inset 6px 6px 5px 0 var(--dark-high-light), inset -6px -6px 5px 0 var(--soft-high-light);
 }
 
-input:checked + .slider:before {
+input:checked+.slider:before {
   background-color: var(--secondary-font-color);
 }
 
-input:checked + .slider:before {
+input:checked+.slider:before {
   transform: translateX(26px);
 }
 
