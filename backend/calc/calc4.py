@@ -26,8 +26,7 @@ async def handler(websocket, path):
     except websockets.exceptions.ConnectionClosed:
         print("Connection closed")
 
-
-start_server = websockets.serve(handler, "localhost", 8200)
+start_server = websockets.serve(handler, "localhost", 8203)
 
 asyncio.get_event_loop().run_until_complete(start_server)
 asyncio.get_event_loop().run_forever()
