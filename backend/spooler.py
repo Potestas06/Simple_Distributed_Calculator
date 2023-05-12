@@ -43,12 +43,12 @@ async def log(message, response, checksumm):
         }))
         print(f'Sent "{message}" to logger')
 
-        # reply = await websocket.recv()
-        # data = json.loads(reply)
-        # if data["status"] == "success":
-        #     print(f"Logged: {message}")
-        # else:
-        #     print(f"Failed to log: {message}")
+        reply = await websocket.recv()
+        data = json.loads(reply)
+        if data["status"] == "success":
+            print(f"Logged: {message}")
+        else:
+            print(f"Failed to log: {message}")
 
 
 async def connect(port, message):
