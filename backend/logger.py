@@ -3,7 +3,7 @@ import websockets
 import json
 import datetime
 
-LOGFILE_PATH = "logfile.txt"
+LOGFILE_PATH = "logfile.log"
 
 async def log(message):
     current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
