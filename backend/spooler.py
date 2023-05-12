@@ -34,9 +34,10 @@ async def checker(message, result):
         return True
 
 
-async def log(message, response):
+async def log(message, response, checksumm):
     async with websockets.connect("ws://localhost:8010") as websocket:
         await websocket.send(json.dumps({
+            "checksumm": checksumm,
             "message": message,
             "response": response
         }))
