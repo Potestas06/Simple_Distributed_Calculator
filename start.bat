@@ -6,5 +6,5 @@ cd calc
 start cmd /k python calc.py
 start cmd /k python calc2.py
 start cmd /k python calc3.py
-start cmd /k python calc4.p
-start cmd /k python calc5.p
+start cmd /k python calc4.py
+start cmd /k python calc5.py
