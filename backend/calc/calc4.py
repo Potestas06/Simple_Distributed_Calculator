@@ -10,9 +10,18 @@ async def calc(message):
         if not isinstance(work, str):
             raise NameError("Invalid input")
         result = str(eval(work))
+        with open('calculations.json', 'r') as f:
+            for line in f:
+                if json.loads(line)['work'] == work:
+                    return result
+        with open('calculations.json', 'a') as f:
+            f.write(json.dumps({'work': work, 'result': result}) + '\n')
         return result
     except (NameError, KeyError, TypeError, SyntaxError) as e:
         error_msg = "Error: " + str(e)
+        return error_msg
+    except Exception as e:
+        error_msg = "Unknown error: " + str(e)
         return error_msg
 
 

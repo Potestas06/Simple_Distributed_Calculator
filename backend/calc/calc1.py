@@ -10,9 +10,18 @@ async def calc(message):
         if not isinstance(work, str):
             raise NameError("Invalid input")
         result = str(eval(work))
+        with open('calculations.json', 'r') as f:
+            for line in f:
+                if json.loads(line)['work'] == work:
+                    return result
+        with open('calculations.json', 'a') as f:
+            f.write(json.dumps({'work': work, 'result': result}) + '\n')
         return result
     except (NameError, KeyError, TypeError, SyntaxError) as e:
         error_msg = "Error: " + str(e)
+        return error_msg
+    except Exception as e:
+        error_msg = "Unknown error: " + str(e)
         return error_msg
 
 
@@ -23,11 +32,11 @@ async def handler(websocket, path):
             reply = await calc(message)
             await websocket.send(reply)
             print(f"Sent reply: {reply}")
-    except websockets.exceptions.ConnectionClosed:
+    except websockets.exceptions.ConnectionClosed: # type: ignore
         print("Connection closed")
 
 
-start_server = websockets.serve(handler, "localhost", 8200)
+start_server = websockets.serve(handler, "localhost", 8200) # type: ignore
 
 asyncio.get_event_loop().run_until_complete(start_server)
 asyncio.get_event_loop().run_forever()
