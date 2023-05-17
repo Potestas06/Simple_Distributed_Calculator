@@ -1,7 +1,7 @@
 import asyncio
 import websockets
 
-
+# sents the message to the spooler
 async def redirect(message):
     async with websockets.connect(f"ws://localhost:8001") as websocket: # type: ignore
         await websocket.send(message)
@@ -11,7 +11,7 @@ async def redirect(message):
         print(f"Result: {response}")
         return response
 
-
+# handels incoming request
 async def handler(websocket, path):
     async for message in websocket:
         print(f"Received message: {message}")

@@ -6,7 +6,7 @@ import os
 
 LOGFILE_PATH = "logs/logfile.log"
 
-
+# saves the data in the logfile.log
 async def log(message, response, checksum):
     current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     response = json.dumps({"result": response})
@@ -20,7 +20,7 @@ async def log(message, response, checksum):
         logfile.write(f"{response}")
         logfile.write(f"{checksum}\n")
 
-
+# handles incoming request
 async def handler(websocket, path):
     async for message in websocket:
         data = json.loads(message)

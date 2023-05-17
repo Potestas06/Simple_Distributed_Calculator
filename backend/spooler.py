@@ -1,22 +1,23 @@
 import asyncio
 import json
-import websockets # type: ignore
+import websockets
 import random
 
 ports = [8200, 8201, 8202, 8203, 8204]
 
-
+# gets the checksum from a random port
 async def get_checksum(message):
     return await connect(random.choice(ports), message)
 
 
+# checks if the checksum is correct
 async def checker(result, message):
     if result == await get_checksum(message):
         return True
     else:
         return False
 
-
+# logs the message, response, and checksum
 async def log(message, response, checksum):
     async with websockets.connect("ws://localhost:8010") as websocket: # type: ignore
         await websocket.send(json.dumps({
@@ -34,6 +35,7 @@ async def log(message, response, checksum):
             print(f"Failed to log: {message}")
 
 
+# connects to a port and sends a message
 async def connect(port, message):
     async with websockets.connect(f"ws://localhost:{port}") as websocket: # type: ignore
         await websocket.send(message)
@@ -44,6 +46,7 @@ async def connect(port, message):
         return response
 
 
+# handles incoming request
 async def handler(websocket, path):
     async for message in websocket:
         print(f"Received message: {message}")

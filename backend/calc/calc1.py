@@ -2,7 +2,7 @@ import asyncio
 import websockets
 import json
 
-
+# calculates the result of the work and saves it in a json file if it isn't not already there
 async def calc(message):
     try:
         data = json.loads(message)
@@ -25,6 +25,7 @@ async def calc(message):
         return error_msg
 
 
+# handles the connection to the client
 async def handler(websocket, path):
     try:
         async for message in websocket:
