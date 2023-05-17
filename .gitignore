@@ -2,4 +2,4 @@
 /shelf/
 /workspace.xml
 *.vscode
-*.log
+logfile.log
