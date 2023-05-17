@@ -1,6 +1,6 @@
 import asyncio
 import json
-import websockets
+import websockets # type: ignore
 import random
 
 ports = [8200, 8201, 8202, 8203, 8204]
@@ -18,7 +18,7 @@ async def checker(result, message):
 
 
 async def log(message, response, checksum):
-    async with websockets.connect("ws://localhost:8010") as websocket:
+    async with websockets.connect("ws://localhost:8010") as websocket: # type: ignore
         await websocket.send(json.dumps({
             "checksum": checksum,
             "message": message,
@@ -35,7 +35,7 @@ async def log(message, response, checksum):
 
 
 async def connect(port, message):
-    async with websockets.connect(f"ws://localhost:{port}") as websocket:
+    async with websockets.connect(f"ws://localhost:{port}") as websocket: # type: ignore
         await websocket.send(message)
         print(f"Sent: {message}")
 
@@ -53,7 +53,7 @@ async def handler(websocket, path):
         print(f"Sent reply: {reply}")
 
 
-start_server = websockets.serve(handler, "localhost", 8001)
+start_server = websockets.serve(handler, "localhost", 8001) # type: ignore
 
 asyncio.get_event_loop().run_until_complete(start_server)
 asyncio.get_event_loop().run_forever()
