@@ -2,6 +2,5 @@
 /shelf/
 /workspace.xml
 *.vscode
-*.log
-/test.bat
+logfile.log
 /.idea/

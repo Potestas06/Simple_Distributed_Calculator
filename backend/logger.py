@@ -37,7 +37,7 @@ async def handler(websocket, path):
         await websocket.send(reply)
         print(f"Sent reply: {reply}")
 
-start_server = websockets.serve(handler, "localhost", 8010)
+start_server = websockets.serve(handler, "localhost", 8010) # type: ignore
 
 asyncio.get_event_loop().run_until_complete(start_server)
 asyncio.get_event_loop().run_forever()
